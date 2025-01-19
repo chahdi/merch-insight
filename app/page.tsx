@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { AuthGetCurrentUserServer, cookiesClient } from "@/utils/amplify-utils";
 import Logout from "@/components/Logout";
+import RecipeGenerator from "@/components/RecipeGenerator";
 export default async function Home() {
   const user = await AuthGetCurrentUserServer();
   const {data: todos} = await cookiesClient.models.Todo.list()
@@ -28,6 +29,7 @@ export default async function Home() {
       <ul>
         {todos && todos.map((todo) => <li key={todo.id}>{todo.content}</li>)}
       </ul>
+      <RecipeGenerator />
     </>
   );
 }
